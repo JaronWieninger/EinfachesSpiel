@@ -34,6 +34,15 @@ public class GewinnController {
                 view.gesamtPunkteLabel.setText("Gesamtpunkte: " + model.getGesamtPunkte());
             }
         });
+        view.nochEinmalButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.spielerZahlField.setText("");
+                view.computerZahlField.setText("");
+                view.rundenErgebnisLabel.setText("Rundenergebnis: 0");
+            }
+        });
+
     }
 
     public static void main(String[] args) {
