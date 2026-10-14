@@ -39,7 +39,7 @@ public class GewinnView {
         JPanel computerPanel = new JPanel(new GridLayout(2, 1));
         JLabel computerLabel = new JLabel("Computerzahl:", SwingConstants.CENTER);
         computerZahlField = new JTextField();
-        computerZahlField.setEditable(false);[cite: 1]
+        computerZahlField.setEditable(false);
 
         computerPanel.add(computerLabel);
         computerPanel.add(computerZahlField);
