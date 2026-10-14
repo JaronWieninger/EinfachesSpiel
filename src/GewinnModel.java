@@ -4,7 +4,6 @@ public class GewinnModel {
     private int computerZahl;
     private int rundenErgebnis;
 
-    // Konstruktor: Setzt die Startwerte des Spiels
     public GewinnModel() {
         this.gesamtPunkte = 30;
         this.spielerZahl = 0;
@@ -20,5 +19,26 @@ public class GewinnModel {
 
     public int getRundenErgebnis() {
         return rundenErgebnis;
+    }
+    public void berechneComputerZahl() {
+        int min = 1;
+        int max = 9;
+        int range = max - min + 1;
+
+        this.computerZahl = (int)(Math.random() * range) + min;
+    }
+
+    public void berechneRunde(int spielerZahl) {
+        this.spielerZahl = spielerZahl;
+        if(spielerZahl == this.computerZahl) {
+            this.rundenErgebnis = 20;
+            this.gesamtPunkte += 20;
+        } else if(Math.abs(spielerZahl - this.computerZahl) == 1) {
+            this.rundenErgebnis = 5;
+            this.gesamtPunkte += 5;
+        } else {
+            this.rundenErgebnis = -10;
+            this.gesamtPunkte -= 10;
+        }
     }
 }
