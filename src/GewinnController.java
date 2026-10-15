@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,13 +11,10 @@ public class GewinnController {
         this.model = model;
         this.view = view;
 
-        // Wenn Enter im Textfeld gedrückt wird
         view.spielerZahlField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 int spielerZahl;
-
                 try {
                     spielerZahl = Integer.parseInt(view.spielerZahlField.getText());
                 } catch (NumberFormatException ex) {
@@ -39,10 +37,17 @@ public class GewinnController {
                 // Sicherheits-Nachbesserung (Version 1.1): Eingabe sperren, Button aktivieren
                 view.spielerZahlField.setEnabled(false);
                 view.nochEinmalButton.setEnabled(true);
+
+                // Bunte Oberfläche (Version 2.0): Farbliche Markierung bei Gewinn/Verlust
+                if (model.hatGewonnen()) {
+                    view.gesamtPunkteLabel.setBackground(Color.GREEN);
+                    view.rundenErgebnisLabel.setBackground(Color.GREEN);
+                } else if (model.hatVerloren()) {
+                    view.gesamtPunkteLabel.setBackground(Color.RED);
+                    view.rundenErgebnisLabel.setBackground(Color.RED);
+                }
             }
         });
-
-        // Wenn "Noch einmal" gedrückt wird
         view.nochEinmalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,17 +55,17 @@ public class GewinnController {
                 view.computerZahlField.setText("");
                 view.rundenErgebnisLabel.setText("Rundenergebnis: 0");
 
-                // Sicherheits-Nachbesserung (Version 1.1): Eingabe freigeben, Button deaktivieren
-                view.spielerZahlField.setEnabled(true);
-                view.nochEinmalButton.setEnabled(false);
+                // Bunte Oberfläche (Version 2.0): Farben wieder auf Weiß zurücksetzen
+                view.gesamtPunkteLabel.setBackground(Color.WHITE);
+                view.rundenErgebnisLabel.setBackground(Color.WHITE);
             }
         });
+
     }
 
     public static void main(String[] args) {
         GewinnModel model = new GewinnModel();
         GewinnView view = new GewinnView();
-
         new GewinnController(model, view);
     }
 }
